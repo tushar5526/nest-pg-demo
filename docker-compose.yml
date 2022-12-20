@@ -1,10 +1,40 @@
 version: '3.8'
 services:
-  dev-db:
-    image: postgres
-    ports:
-      - 5432:5432
+  # dev-db:
+  #   image: postgres
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: meh
+  #     POSTGRES_DB: somedb
+#   dev-db:
+#     image: mysql:5.7
+#     environment:
+#       MYSQL_DATABASE: 'somedb'
+#       # So you don't have to use root, but you can if you like
+#       MYSQL_USER: 'mysql'
+#       # You can use whatever password you like
+#       MYSQL_PASSWORD: 'mysql'
+#       # Password for root access
+#       MYSQL_ROOT_PASSWORD: 'root'
+#     ports:
+#       - '3306:3306'
+#     expose:
+#       # Opens port 3306 on the container
+#       - '3306'
+# #       # Where our data will be persisted
+#     volumes:
+#       - mysql:/var/lib/mysql
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: meh
-      POSTGRES_DB: somedb
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql:/var/opt/mssql/data
+volumes:
+  mssql:
