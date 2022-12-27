@@ -52,6 +52,7 @@ export class AppService {
       const nelement = Object.fromEntries(
         Object.entries(element).map(([k, v]) => [lowerCase(k), v]),
       );
+      nelement.roles = ['USER'];
       nres.push(nelement);
     });
     return nres;
