@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { MSSQL_CONNECTION } from './constants';
-import * as bcrypt from 'bcrypt';
 import * as CryptoJS from 'crypto';
 
 @Injectable()
@@ -107,5 +106,21 @@ export class AppService {
       });
     });
     return cred_res[0];
+  }
+
+  async getTutorById(id: string) {
+    const db = await this.conn.connect();
+    const res = await db.query(
+      `Select * from test.dbo.Master_Tutor_Basic_Info where TutorKey='${id}'`,
+    );
+    return res.recordset[0];
+  }
+
+  async getStudentById(id: string) {
+    const db = await this.conn.connect();
+    const res = await db.query(
+      `Select * from test.dbo.Master_StudentProfile where StudentProfileKey='${id}'`,
+    );
+    return res.recordset[0];
   }
 }

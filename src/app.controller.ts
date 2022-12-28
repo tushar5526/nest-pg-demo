@@ -28,4 +28,14 @@ export class AppController {
   getUserCredentials(@Param() params) {
     return this.appService.getUserCredentials(params.id);
   }
+
+  @Get('student/:id')
+  getStudent(@Param() params) {
+    return this.appService.getStudentById(params.id);
+  }
+
+  @Get('tutor/:id')
+  getTutor(@Param() params) {
+    return this.appService.getTutorById(params.id);
+  }
 }
